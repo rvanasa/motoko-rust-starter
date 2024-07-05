@@ -1,5 +1,5 @@
-import Prim "mo:prim";
+import { debugPrint; componentCall = call } "mo:prim";
 
-let result = Prim.componentCall(123); // Call Rust function
+let result = call(123); // Call Rust function
 
-Prim.debugPrint("Result: " # debug_show result); // Print return value
+debugPrint("Result: " # debug_show result); // Print return value

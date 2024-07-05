@@ -17,7 +17,5 @@ export TARGET=wasm32-unknown-unknown
     wasm-tools component new --skip-validation target/motoko-embed.wasm -o target/motoko-component.wasm --adapt wasi_snapshot_preview1=target/wasi-adapter.wasm &&
     
     # Compose components
-    wac encode src/wac/composition.wac -d motoko:component=target/motoko-component.wasm -d rust:component=target/rust-component.wasm -o target/motoko-composed.wasm &&
-
-    echo Done
+    wac encode src/wac/composition.wac -d motoko:component=target/motoko-component.wasm -d rust:component=target/rust-component.wasm -o target/motoko-composed.wasm
 )
