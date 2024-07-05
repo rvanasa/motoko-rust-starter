@@ -1,0 +1,5 @@
+package rust:component;
+
+world component {
+  export call: func(value: u32) -> u32;
+}

@@ -1,0 +1,10 @@
+package motoko:composition;
+
+let rust = new rust:component {};
+
+let motoko = new motoko:component {
+    component: rust,
+    ...
+};
+
+export motoko.run;

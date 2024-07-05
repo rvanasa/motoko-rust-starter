@@ -1,0 +1,7 @@
+package motoko:component;
+
+world motoko {
+    import component: interface {
+        call: func(value: u32) -> u32;
+    }
+}
