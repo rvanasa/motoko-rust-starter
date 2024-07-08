@@ -8,7 +8,7 @@ export TARGET=wasm32-unknown-unknown
     wasm-tools component new target/$TARGET/debug/component.wasm -o target/rust-component.wasm &&
 
     # Download `wasi_snapshot_preview1` adapter (used for building the Motoko component)
-    ( wget -nc -q https://github.com/bytecodealliance/wasmtime/releases/download/v22.0.0/wasi_snapshot_preview1.command.wasm -O target/wasi-adapter.wasm || rm target/wasi-adapter.wasm ) &&
+    ( wget -c -q https://github.com/bytecodealliance/wasmtime/releases/download/v22.0.0/wasi_snapshot_preview1.command.wasm -O target/wasi-adapter.wasm ) &&
 
     # Build Motoko component
     # TODO: replace with `$(dfx cache show)/moc`
