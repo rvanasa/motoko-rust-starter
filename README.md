@@ -23,7 +23,7 @@ Currently, it's only possible to call a function with a `Nat32` input and return
 
 ### Motoko Compiler
 
-Since cross-language support relies on [this PR](https://github.com/dfinity/motoko/pull/4580), it's currently necessary to use a custom version of the Motoko compiler. You can set this up with the following steps:
+Since cross-language support relies on [this unmerged PR](https://github.com/dfinity/motoko/pull/4580), it's currently necessary to use a custom version of the Motoko compiler. You can set this up with the following steps:
 
 ```sh
 # Open a terminal in the root of this repository
