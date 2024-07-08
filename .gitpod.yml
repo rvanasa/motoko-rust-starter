@@ -20,8 +20,6 @@ tasks:
       git checkout ryan/component-call
       nix-shell --run "make -C src moc && make -C rts"
       cd ../motoko-rust-starter
-    init: |
-      scripts/run.sh
     command: |
       scripts/run.sh
 
