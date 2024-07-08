@@ -15,17 +15,31 @@ This repository provides a minimal starter project for calling Rust functions fr
 * [`wac`](https://github.com/bytecodealliance/wac#readme)
 * [`dfx`](https://support.dfinity.org/hc/en-us/articles/10552713577364-How-do-I-install-dfx)
 
+### Motoko Compiler
+
+Since cross-language support relies on [this PR](https://github.com/dfinity/motoko/pull/4580), it's currently necessary to use a custom version of the Motoko compiler. You can set this up with the following steps:
+
+```sh
+# Open a terminal in the root of this repository
+cd ..
+git clone https://github.com/dfinity/motoko.git
+cd motoko
+git checkout ryan/component-call
+```
+
+We can remove this step after merging the corresponding PR.
+
 ### Scripts
 
-This repository includes Bash scripts which document how to build and combine a Motoko + Rust component.
+The starter project includes Bash files in the `/scripts` directory to create and run a Motoko + Rust component.
 
-#### Build the component:
+**Build the component:**
 
 ```sh
 scripts/build.sh
 ```
 
-#### Run in Wasmtime:
+**Build and run in Wasmtime:**
 
 ```sh
 scripts/run.sh
