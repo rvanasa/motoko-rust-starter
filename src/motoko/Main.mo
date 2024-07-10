@@ -17,6 +17,7 @@ func verifySignature(message : SignedMessage) : {
     #err : VerifyError;
 } {
     switch (callRust(to_candid (message))) {
+        // TODO: use `from_candid` in place of numeric return codes (work in progress)
         case 0 #ok true;
         case 1 #ok false;
         case 2 #err(#verify);
