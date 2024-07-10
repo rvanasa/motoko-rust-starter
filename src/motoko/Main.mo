@@ -3,6 +3,7 @@ import {
     componentCall = callRust;
 } "mo:prim";
 
+// Types used in Rust component
 type SignedMessage = {
     eth_address : Text;
     message : { #data : Blob; #hash : Blob };
@@ -10,6 +11,7 @@ type SignedMessage = {
 };
 type VerifyError = { #verify; #candid; #unknown };
 
+// Wrapper around Rust function
 func verifySignature(message : SignedMessage) : {
     #ok : Bool;
     #err : VerifyError;
@@ -23,6 +25,7 @@ func verifySignature(message : SignedMessage) : {
     };
 };
 
+// Verify Ethereum ECDSA signature in Motoko
 let result = verifySignature({
     eth_address = "0xc9b28dca7ea6c5e176a58ba9df53c30ba52c6642";
     message = #data "hello";
