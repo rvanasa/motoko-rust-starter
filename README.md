@@ -8,7 +8,7 @@
 
 This repository is a minimal starter project for calling Rust functions from a Motoko program using the [WebAssembly Component Model](https://component-model.bytecodealliance.org/). While this is currently intended to be used with [Wasmtime](https://github.com/bytecodealliance/wasmtime#readme), it's possible to run the generated Motoko + Rust component in any environment with component model support. 
 
-Currently, it's only possible to call a function with a `Nat32` input and return value. This limitation is temporary and can be replaced with the ability to pass and return Candid-serializable `Blob` values given further changes to the Motoko compiler.
+Currently, it's only possible to call a function with a `Blob` input and `Nat32` return value. This limitation is temporary and can be replaced with the ability to pass and return Candid-serializable `Blob` values given further changes to the Motoko compiler.
 
 ## ⚙️ Getting Started
 
