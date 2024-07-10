@@ -15,8 +15,3 @@ target/
 
 # frontend code
 node_modules/
-
-# generated files
-/bindings
-*.wasm
-*.wat
