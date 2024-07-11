@@ -1,5 +1,9 @@
-import { debugPrint; componentCall = call } "mo:prim";
+import {
+    componentCall = call;
+    decodeUtf8;
+    debugPrint;
+} "mo:prim";
 
 let result = call("abc"); // Call Rust function
 
-debugPrint("Result: " # debug_show result); // Print return value
+debugPrint("Result: " # debug_show (decodeUtf8(result))); // Print return value

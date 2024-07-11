@@ -7,7 +7,7 @@ struct Component;
 export!(Component);
 
 impl Guest for Component {
-    fn call(value: Vec<u8>) -> u32 {
-        value.len() as u32 * 2
+    fn call(value: Vec<u8>) -> Vec<u8> {
+        [value.clone(), value].concat()
     }
 }
