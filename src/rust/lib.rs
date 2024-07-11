@@ -18,9 +18,7 @@ struct SignedMessage {
 
 #[derive(Clone, Debug, CandidType, Deserialize)]
 enum Message {
-    #[serde(rename = "data")]
     Data(Vec<u8>),
-    #[serde(rename = "hash")]
     Hash([u8; 32]),
 }
 
@@ -28,7 +26,7 @@ impl Guest for Component {
     fn call(arg: Vec<u8>) -> Vec<u8> {
         let result = Decode!(&arg, SignedMessage)
             .map(ecdsa_verify)
-            .unwrap_or(Err("invalid message"));
+            .unwrap_or(Err("unexpected input value"));
         Encode!(&result).unwrap()
     }
 }
