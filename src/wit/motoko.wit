@@ -2,6 +2,6 @@ package motoko:component;
 
 world motoko {
     import component: interface {
-        call: func(value: list<u8>) -> u32;
+        call: func(value: list<u8>) -> list<u8>;
     }
 }

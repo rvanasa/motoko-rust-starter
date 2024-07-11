@@ -1,6 +1,6 @@
 import {
+    componentCall = call;
     debugPrint;
-    componentCall = callRust;
 } "mo:prim";
 
 // Types used in Rust component

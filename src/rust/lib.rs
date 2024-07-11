@@ -1,4 +1,4 @@
-use candid::{CandidType, Decode, Deserialize};
+use candid::{CandidType, Decode, Deserialize, Encode};
 use ethers_core::types::{RecoveryMessage, Signature, H256};
 
 wit_bindgen::generate!({
@@ -25,27 +25,24 @@ enum Message {
 }
 
 impl Guest for Component {
-    fn call(value: Vec<u8>) -> u32 {
-        Decode!(&value, SignedMessage)
-            .map(|message| match ecdsa_verify(message) {
-                Some(true) => 0,  // valid
-                Some(false) => 1, // invalid
-                _ => 2,           // verification error
-            })
-            .unwrap_or(3) // deserialization error
+    fn call(arg: Vec<u8>) -> Vec<u8> {
+        let result = Decode!(&arg, SignedMessage)
+            .map(ecdsa_verify)
+            .unwrap_or(Err("invalid message"));
+        Encode!(&result).unwrap()
     }
 }
 
 /// Converts a hexadecimal string (prefixed with `0x`) to bytes.
-pub fn hex_to_bytes(hex: &str) -> Option<Vec<u8>> {
+pub fn hex_to_bytes(hex: &str) -> Result<Vec<u8>, &'static str> {
     if !hex.starts_with("0x") {
-        return None;
+        return Err("hex literal requires `0x` prefix");
     }
-    hex::decode(&hex[2..]).ok()
+    hex::decode(&hex[2..]).or(Err("invalid hex literal"))
 }
 
 /// Verifies an Ethereum message signature using ECDSA.
-fn ecdsa_verify(message: SignedMessage) -> Option<bool> {
+fn ecdsa_verify(message: SignedMessage) -> Result<bool, &'static str> {
     let eth_address = hex_to_bytes(&message.eth_address)?;
     let signature = hex_to_bytes(&message.signature)?;
     let message = match message.message {
@@ -53,17 +50,15 @@ fn ecdsa_verify(message: SignedMessage) -> Option<bool> {
         Message::Hash(hash) => RecoveryMessage::Hash(H256::from_slice(&hash)),
     };
 
-    let eth_address_bytes: [u8; 20] = eth_address.try_into().expect("expected 20-byte address");
+    let eth_address_bytes: [u8; 20] = eth_address.try_into().or(Err("expected 20-byte address"))?;
     if signature.len() != 65 {
-        return None;
+        return Err("unexpected signature length");
     }
-    Some(
-        Signature {
-            r: signature[..32].into(),
-            s: signature[32..64].into(),
-            v: signature[64].into(),
-        }
-        .verify(message, eth_address_bytes)
-        .is_ok(),
-    )
+    Ok(Signature {
+        r: signature[..32].into(),
+        s: signature[32..64].into(),
+        v: signature[64].into(),
+    }
+    .verify(message, eth_address_bytes)
+    .is_ok())
 }
