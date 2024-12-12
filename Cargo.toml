@@ -12,3 +12,10 @@ path = "src/rust/lib.rs"
 
 [dependencies]
 wit-bindgen = "0.27"
+
+# For ECDSA verification example
+candid = "0.10.9"
+ethers-core = "2.0.14"
+getrandom = { version = "*", features = ["custom"], default-features = false }
+hex = "0.4.3"
+serde = "1.0"
