@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "src/rust/ic_sig_verifier"
+		},
+		{
+			"path": "src/rust/meet_and_greet"
+		}
+	],
+	"settings": {}
+}
